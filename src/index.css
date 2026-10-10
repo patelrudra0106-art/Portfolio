@@ -1,0 +1,56 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+html,
+body,
+#root,
+.main-wrapper {
+  background-color: #0C0C0C;
+  font-family: 'Kanit', sans-serif;
+  overflow-x: clip;
+}
+
+.hero-heading {
+  background: linear-gradient(180deg, #646973 0%, #BBCCD7 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* Hero title: "HI, I'M RUDRA" is ~6.2em wide in Kanit Black, so size it from the
+   available width (viewport minus side padding) instead of a fixed vw value. */
+.hero-title {
+  font-size: calc((100vw - 3rem) / 6.3);
+}
+@media (min-width: 768px) {
+  .hero-title {
+    font-size: calc((100vw - 5rem) / 6.3);
+  }
+}
