@@ -22,8 +22,10 @@ export const ContactForm = () => {
     // Honeypot: real visitors never fill this hidden field.
     if (data.get('botcheck')) return;
 
+    const accessKey = contact.formAccessKey || import.meta.env.VITE_WEB3FORMS_ACCESS_KEY;
+
     // No form service key yet: hand the message to the visitor's mail app.
-    if (!contact.formAccessKey) {
+    if (!accessKey) {
       const subject = encodeURIComponent(`Portfolio message from ${name}`);
       const body = encodeURIComponent(`${message}\n\n${name}\n${email}`);
       window.location.href = `mailto:${contact.email}?subject=${subject}&body=${body}`;
@@ -36,7 +38,7 @@ export const ContactForm = () => {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
         body: JSON.stringify({
-          access_key: contact.formAccessKey,
+          access_key: accessKey,
           subject: `Portfolio message from ${name}`,
           name,
           email,

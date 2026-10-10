@@ -7,7 +7,7 @@ export const contact = {
   github: 'https://github.com/patelrudra0106-art',
   instagram: 'https://www.instagram.com/rudra011028/',
   location: 'Surat, Gujarat, India',
-  // Free key from https://web3forms.com (enter patelrudra0106@gmail.com there).
+  // Web3Forms key loaded from .env (VITE_WEB3FORMS_ACCESS_KEY).
   // While this is empty, the form opens the visitor's mail app instead.
-  formAccessKey: '',
-} as const;
+  formAccessKey: import.meta.env.VITE_WEB3FORMS_ACCESS_KEY || '',
+};
