@@ -20,17 +20,29 @@ export const ContactForm = () => {
     const message = String(data.get('message') ?? '').trim();
 
     // Honeypot: real visitors never fill this hidden field.
-    if (data.get('botcheck')) return;
+    if (data.get('botcheck')) {
+      console.log('Botcheck triggered!');
+      return;
+    }
+
+    if (!name || !email || !message) {
+      alert('Please fill out all fields before sending.');
+      return;
+    }
 
     const accessKey = contact.formAccessKey || import.meta.env.VITE_WEB3FORMS_ACCESS_KEY;
+    console.log('Access key resolved:', accessKey ? 'Yes' : 'No');
 
     // No form service key yet: hand the message to the visitor's mail app.
     if (!accessKey) {
+      console.log('No access key, opening mailto link...');
       const subject = encodeURIComponent(`Portfolio message from ${name}`);
       const body = encodeURIComponent(`${message}\n\n${name}\n${email}`);
       window.location.href = `mailto:${contact.email}?subject=${subject}&body=${body}`;
       return;
     }
+
+    console.log('Sending to Web3Forms...');
 
     setStatus('sending');
     try {
@@ -63,24 +75,25 @@ export const ContactForm = () => {
         Send a message
       </h3>
 
-      <input type="text" name="botcheck" tabIndex={-1} autoComplete="off" aria-hidden="true" className="hidden" />
+      <input type="checkbox" name="botcheck" tabIndex={-1} autoComplete="off" aria-hidden="true" className="hidden" />
 
       <label className="flex flex-col gap-2 text-sm font-light uppercase tracking-wider text-[#D7E2EA]/70">
         Name
-        <input name="name" type="text" required maxLength={80} autoComplete="name" className={fieldClass} />
+        <input name="name" type="text" maxLength={80} autoComplete="name" className={fieldClass} />
       </label>
       <label className="flex flex-col gap-2 text-sm font-light uppercase tracking-wider text-[#D7E2EA]/70">
         Email
-        <input name="email" type="email" required maxLength={120} autoComplete="email" className={fieldClass} />
+        <input name="email" type="email" maxLength={120} autoComplete="email" className={fieldClass} />
       </label>
       <label className="flex flex-col gap-2 text-sm font-light uppercase tracking-wider text-[#D7E2EA]/70">
         Message
-        <textarea name="message" required rows={5} maxLength={2000} className={`${fieldClass} resize-y`} />
+        <textarea name="message" rows={5} maxLength={2000} className={`${fieldClass} resize-y`} />
       </label>
 
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
         <button
           type="submit"
+          onClick={() => console.log('Button clicked!')}
           disabled={status === 'sending'}
           className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-[#D7E2EA] px-8 py-3
             font-medium uppercase tracking-widest text-[#D7E2EA] transition-colors duration-200
