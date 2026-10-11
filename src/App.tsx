@@ -1,7 +1,7 @@
 import { HeroSection } from './components/HeroSection';
 import { MarqueeSection } from './components/MarqueeSection';
 import { AboutSection } from './components/AboutSection';
-import { ServicesSection } from './components/ServicesSection';
+import { SkillsSection } from './components/SkillsSection';
 import { ProjectsSection } from './components/ProjectsSection';
 import { ContactSection } from './components/ContactSection';
 import { Footer } from './components/Footer';
@@ -12,7 +12,7 @@ function App() {
       <HeroSection />
       <MarqueeSection />
       <AboutSection />
-      <ServicesSection />
+      <SkillsSection />
       <ProjectsSection />
       <ContactSection />
       <Footer />

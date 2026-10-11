@@ -2,7 +2,7 @@ import { FormEvent, useState } from 'react';
 import { Send } from 'lucide-react';
 import { contact } from '../data/contact';
 
-type Status = 'idle' | 'sending' | 'sent' | 'error';
+type Status = 'idle' | 'sending' | 'sent' | 'error' | 'invalid' | 'mailto';
 
 const fieldClass =
   'w-full rounded-[20px] border-2 border-[#D7E2EA]/60 bg-transparent px-5 py-3 text-[#D7E2EA] placeholder:text-[#D7E2EA]/40 ' +
@@ -20,29 +20,23 @@ export const ContactForm = () => {
     const message = String(data.get('message') ?? '').trim();
 
     // Honeypot: real visitors never fill this hidden field.
-    if (data.get('botcheck')) {
-      console.log('Botcheck triggered!');
-      return;
-    }
+    if (data.get('botcheck')) return;
 
     if (!name || !email || !message) {
-      alert('Please fill out all fields before sending.');
+      setStatus('invalid');
       return;
     }
 
-    const accessKey = contact.formAccessKey || import.meta.env.VITE_WEB3FORMS_ACCESS_KEY;
-    console.log('Access key resolved:', accessKey ? 'Yes' : 'No');
+    const accessKey = contact.formAccessKey;
 
-    // No form service key yet: hand the message to the visitor's mail app.
+    // No form service key: hand the message to the visitor's mail app.
     if (!accessKey) {
-      console.log('No access key, opening mailto link...');
       const subject = encodeURIComponent(`Portfolio message from ${name}`);
       const body = encodeURIComponent(`${message}\n\n${name}\n${email}`);
       window.location.href = `mailto:${contact.email}?subject=${subject}&body=${body}`;
+      setStatus('mailto');
       return;
     }
-
-    console.log('Sending to Web3Forms...');
 
     setStatus('sending');
     try {
@@ -79,21 +73,20 @@ export const ContactForm = () => {
 
       <label className="flex flex-col gap-2 text-sm font-light uppercase tracking-wider text-[#D7E2EA]/70">
         Name
-        <input name="name" type="text" maxLength={80} autoComplete="name" className={fieldClass} />
+        <input name="name" type="text" required maxLength={80} autoComplete="name" className={fieldClass} />
       </label>
       <label className="flex flex-col gap-2 text-sm font-light uppercase tracking-wider text-[#D7E2EA]/70">
         Email
-        <input name="email" type="email" maxLength={120} autoComplete="email" className={fieldClass} />
+        <input name="email" type="email" required maxLength={120} autoComplete="email" className={fieldClass} />
       </label>
       <label className="flex flex-col gap-2 text-sm font-light uppercase tracking-wider text-[#D7E2EA]/70">
         Message
-        <textarea name="message" rows={5} maxLength={2000} className={`${fieldClass} resize-y`} />
+        <textarea name="message" required rows={5} maxLength={2000} className={`${fieldClass} resize-y`} />
       </label>
 
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
         <button
           type="submit"
-          onClick={() => console.log('Button clicked!')}
           disabled={status === 'sending'}
           className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-[#D7E2EA] px-8 py-3
             font-medium uppercase tracking-widest text-[#D7E2EA] transition-colors duration-200
@@ -106,6 +99,8 @@ export const ContactForm = () => {
         <p role="status" aria-live="polite" className="text-sm text-[#D7E2EA]/80">
           {status === 'sent' && 'Thanks! Your message was sent.'}
           {status === 'error' && `Could not send. Please email ${contact.email} instead.`}
+          {status === 'invalid' && 'Please fill out all fields before sending.'}
+          {status === 'mailto' && `Opening your mail app. If nothing opens, email ${contact.email}.`}
         </p>
       </div>
     </form>
