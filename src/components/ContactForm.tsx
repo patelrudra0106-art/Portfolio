@@ -2,7 +2,7 @@ import { FormEvent, useState } from 'react';
 import { Send } from 'lucide-react';
 import { contact } from '../data/contact';
 
-type Status = 'idle' | 'sending' | 'sent' | 'error' | 'invalid' | 'mailto';
+type Status = 'idle' | 'sending' | 'sent' | 'error' | 'invalid';
 
 const fieldClass =
   'w-full rounded-[20px] border-2 border-[#D7E2EA]/60 bg-transparent px-5 py-3 text-[#D7E2EA] placeholder:text-[#D7E2EA]/40 ' +
@@ -29,12 +29,10 @@ export const ContactForm = () => {
 
     const accessKey = contact.formAccessKey;
 
-    // No form service key: hand the message to the visitor's mail app.
+    // The message is always sent from the site itself; without a key it cannot be sent.
     if (!accessKey) {
-      const subject = encodeURIComponent(`Portfolio message from ${name}`);
-      const body = encodeURIComponent(`${message}\n\n${name}\n${email}`);
-      window.location.href = `mailto:${contact.email}?subject=${subject}&body=${body}`;
-      setStatus('mailto');
+      console.error('Contact form: Web3Forms access key is missing.');
+      setStatus('error');
       return;
     }
 
@@ -51,11 +49,12 @@ export const ContactForm = () => {
           message,
         }),
       });
-      const json = (await res.json()) as { success?: boolean };
-      if (!res.ok || !json.success) throw new Error('Submit failed');
+      const json = (await res.json()) as { success?: boolean; message?: string };
+      if (!res.ok || !json.success) throw new Error(json.message || 'Submit failed');
       form.reset();
       setStatus('sent');
-    } catch {
+    } catch (err) {
+      console.error('Contact form submit failed:', err);
       setStatus('error');
     }
   };
@@ -100,7 +99,6 @@ export const ContactForm = () => {
           {status === 'sent' && 'Thanks! Your message was sent.'}
           {status === 'error' && `Could not send. Please email ${contact.email} instead.`}
           {status === 'invalid' && 'Please fill out all fields before sending.'}
-          {status === 'mailto' && `Opening your mail app. If nothing opens, email ${contact.email}.`}
         </p>
       </div>
     </form>
