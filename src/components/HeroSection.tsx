@@ -30,7 +30,7 @@ export const HeroSection = () => {
         <Magnet padding={150} strength={3} activeTransition="transform 0.3s ease-out" inactiveTransition="transform 0.6s ease-in-out">
           <img
             src={PORTRAIT_URL}
-            alt="Rudra - 3D Creator portrait"
+            alt="Rudra, full-stack web developer from Surat, Gujarat"
             className="w-full h-auto rounded-[28px] sm:rounded-[50px] md:rounded-[60px]"
             loading="eager"
           />
@@ -43,7 +43,7 @@ export const HeroSection = () => {
         <FadeIn delay={0.35} y={20} duration={0.8}>
           <p className="text-[#D7E2EA] font-light uppercase tracking-wide leading-snug
             text-[clamp(0.8rem,1.4vw,1.25rem)] max-w-[260px] sm:max-w-[220px] xl:max-w-[260px]">
-            a 3d creator driven by crafting striking and unforgettable projects
+            a full-stack web developer from surat, gujarat building react and node.js apps
           </p>
         </FadeIn>
 

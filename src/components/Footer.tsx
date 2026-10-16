@@ -13,7 +13,7 @@ export const Footer = () => {
     <footer className="bg-[#0C0C0C] border-t border-[#D7E2EA]/15 px-5 py-10 sm:px-8 md:px-10">
       <div className="mx-auto flex max-w-5xl flex-col items-center gap-6 sm:flex-row sm:justify-between">
         <p className="font-light uppercase tracking-wide text-xs sm:text-sm text-[#D7E2EA]/60">
-          &copy; {new Date().getFullYear()} Rudra
+          &copy; {new Date().getFullYear()} Rudra &middot; Surat, Gujarat, India
         </p>
         <ul className="flex items-center gap-3">
           {footerLinks.map(({ label, href, Icon, external }) => (
