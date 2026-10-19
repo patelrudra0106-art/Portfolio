@@ -1,14 +1,16 @@
 interface LiveProjectButtonProps {
   href: string;
+  label: string; // project title, so each button has a unique accessible name
   className?: string;
 }
 
-export const LiveProjectButton = ({ href, className = '' }: LiveProjectButtonProps) => {
+export const LiveProjectButton = ({ href, label, className = '' }: LiveProjectButtonProps) => {
   return (
     <a
       href={href}
       target="_blank"
       rel="noopener noreferrer"
+      aria-label={`Live project: ${label}`}
       className={`
         inline-flex items-center justify-center rounded-full border-2 border-[#D7E2EA]
         px-8 py-3 sm:px-10 sm:py-3.5

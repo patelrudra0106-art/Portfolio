@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { motion, useScroll, useTransform, MotionValue } from 'framer-motion';
 import { LiveProjectButton } from './LiveProjectButton';
-import { projects, Project } from '../data/projects';
+import { projects, Project, ProjectImage } from '../data/projects';
 
 const STACK_TOP = 16;   // px from viewport top where the first card pins
 const STACK_STEP = 28;  // px each following card pins lower
@@ -22,6 +22,18 @@ const useCanStack = () => {
   }, []);
   return canStack;
 };
+
+const ProjectImg = ({ image, className }: { image: ProjectImage; className: string }) => (
+  <img
+    src={image.src}
+    alt={image.alt}
+    width={image.width}
+    height={image.height}
+    loading="lazy"
+    decoding="async"
+    className={`${className} rounded-[18px] sm:rounded-[36px] md:rounded-[60px] object-cover`}
+  />
+);
 
 interface ProjectCardProps {
   project: Project;
@@ -70,7 +82,11 @@ const ProjectCard = ({ project, index, totalCards, progress, stack }: ProjectCar
           </div>
 
           {project.url ? (
-            <LiveProjectButton href={project.url} className="w-full md:w-auto md:flex-shrink-0" />
+            <LiveProjectButton
+              href={project.url}
+              label={project.title}
+              className="w-full md:w-auto md:flex-shrink-0"
+            />
           ) : (
             <span className="inline-flex w-full items-center justify-center rounded-full border-2 border-[#D7E2EA]/40 px-8 py-3 sm:px-10 sm:py-3.5 text-[#D7E2EA]/60 font-medium uppercase tracking-widest text-sm sm:text-base md:w-auto md:flex-shrink-0">
               {project.badge ?? 'In Development'}
@@ -78,32 +94,28 @@ const ProjectCard = ({ project, index, totalCards, progress, stack }: ProjectCar
           )}
         </div>
 
-        {/* Image grid */}
-        <div className="grid grid-cols-5 gap-2 sm:gap-4">
-          <div className="col-span-2 flex flex-col gap-2 sm:gap-4">
-            <img
-              src={project.images.col1Img1}
-              alt={`${project.title} - view 1`}
-              className="w-full rounded-[18px] sm:rounded-[36px] md:rounded-[60px] object-cover h-[clamp(90px,16vw,230px)]"
-              loading="lazy"
-            />
-            <img
-              src={project.images.col1Img2}
-              alt={`${project.title} - view 2`}
-              className="w-full rounded-[18px] sm:rounded-[36px] md:rounded-[60px] object-cover h-[clamp(110px,22vw,340px)]"
-              loading="lazy"
-            />
-          </div>
+        {/* Image grid: only for projects that have screenshots */}
+        {project.images && (
+          <div className="grid grid-cols-5 gap-2 sm:gap-4">
+            <div className="col-span-2 flex flex-col gap-2 sm:gap-4">
+              <ProjectImg
+                image={project.images.col1Img1}
+                className="w-full h-[clamp(90px,16vw,230px)]"
+              />
+              <ProjectImg
+                image={project.images.col1Img2}
+                className="w-full h-[clamp(110px,22vw,340px)]"
+              />
+            </div>
 
-          <div className="col-span-3">
-            <img
-              src={project.images.col2Img}
-              alt={`${project.title} - main view`}
-              className="w-full h-full min-h-[200px] rounded-[18px] sm:rounded-[36px] md:rounded-[60px] object-cover"
-              loading="lazy"
-            />
+            <div className="col-span-3">
+              <ProjectImg
+                image={project.images.col2Img}
+                className="w-full h-full min-h-[200px]"
+              />
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </motion.div>
   );
