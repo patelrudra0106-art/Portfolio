@@ -4,6 +4,9 @@ export interface Project {
   title: string;
   category: string;
   type: 'Client' | 'Personal';
+  description?: string;
+  url?: string;   // live site; the card shows a "Live Project" button when set
+  badge?: string; // label shown instead of the button when there is no url
   images: {
     col1Img1: string;
     col1Img2: string;
@@ -15,37 +18,57 @@ export const projects: Project[] = [
   {
     id: '01',
     number: '01',
-    title: 'Nextlevel Studio',
-    category: 'Branding / Web Design',
-    type: 'Client',
+    title: 'Brew & Bean',
+    category: 'Landing Page / Web Development',
+    type: 'Personal',
+    description: 'A cafe landing page built with React, Vite, Tailwind CSS and Framer Motion.',
+    url: 'https://cafe-landing-page-ashy.vercel.app',
     images: {
-      col1Img1: 'https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260412_055344_5eff02e0-87a5-41ce-b64f-eb08da8f33db.png&w=1280&q=85',
-      col1Img2: 'https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260412_055431_11d841fd-8b41-46a5-82e4-b04f2407a7d8.png&w=1280&q=85',
-      col2Img: 'https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260412_055451_e317bf2d-28d4-48cc-86b0-6f72f25b6327.png&w=1280&q=85',
+      col1Img1: '/projects/01-1.png',
+      col1Img2: '/projects/01-2.png',
+      col2Img: '/projects/01-3.png',
     },
   },
   {
     id: '02',
     number: '02',
-    title: 'Aura Brand Identity',
-    category: 'Branding / Motion Design',
+    title: 'Travel Website Landing Page',
+    category: 'Landing Page / Web Development',
     type: 'Personal',
+    description: 'A modern and responsive travel agency landing page built with React, TypeScript, Vite, and Tailwind CSS, featuring travel destinations, services, booking steps, testimonials, and a premium travel-focused design.',
+    url: 'https://travel-website-landing-page-iota.vercel.app/',
     images: {
-      col1Img1: 'https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260412_055654_911201c5-36d9-4bc6-bac7-331adfce159f.png&w=1280&q=85',
-      col1Img2: 'https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260412_055723_5ceda0b8-d9c2-4665-b2e3-83ba19ba76d1.png&w=1280&q=85',
-      col2Img: 'https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260412_055753_adc5dcbd-a8e6-49c0-b43a-9b030d835cea.png&w=1280&q=85',
+      col1Img1: '/projects/02-1.png',
+      col1Img2: '/projects/02-2.png',
+      col2Img: '/projects/02-3.png',
     },
   },
   {
     id: '03',
     number: '03',
-    title: 'Solaris Digital',
-    category: 'Web Design / 3D Modeling',
-    type: 'Client',
+    title: 'SPACE-SURVIVOR',
+    category: 'Game / Python',
+    type: 'Personal',
+    description: 'A high-performance, roguelike space shooter built with Python and Pygame, featuring dynamic difficulty scaling, meta-progression, and an event-driven modular architecture.',
+    badge: 'Desktop Game',
     images: {
-      col1Img1: 'https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260412_055759_963cfb0b-4bd1-4b0f-9d0a-09bd6cf95b2f.png&w=1280&q=85',
-      col1Img2: 'https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260412_060108_438f781a-9846-4dcc-89ab-c4e6cb830f5b.png&w=1280&q=85',
-      col2Img: 'https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260412_055818_9d062121-ad7e-46b9-99aa-1a6a692ef1ee.png&w=1280&q=85',
+      col1Img1: '/projects/03-1.png',
+      col1Img2: '/projects/03-2.png',
+      col2Img: '/projects/03-3.png',
+    },
+  },
+  {
+    id: '04',
+    number: '04',
+    title: 'Nova AI Assistant',
+    category: 'AI Assistant / Desktop App',
+    type: 'Personal',
+    description: 'Nova is a voice-controlled Windows assistant that opens apps, controls volume, sends WhatsApp messages, manages reminders, and answers questions with a Groq-hosted LLM.',
+    badge: 'Windows App',
+    images: {
+      col1Img1: '/projects/04-1.png',
+      col1Img2: '/projects/04-2.png',
+      col2Img: '/projects/04-3.png',
     },
   },
 ];

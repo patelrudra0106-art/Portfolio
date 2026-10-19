@@ -33,6 +33,7 @@ export const HeroSection = () => {
             alt="Rudra, full-stack web developer from Surat, Gujarat"
             className="w-full h-auto rounded-[28px] sm:rounded-[50px] md:rounded-[60px]"
             loading="eager"
+            fetchPriority="high"
           />
         </Magnet>
       </FadeIn>

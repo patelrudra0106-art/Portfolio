@@ -62,9 +62,20 @@ const ProjectCard = ({ project, index, totalCards, progress, stack }: ProjectCar
             <span className="text-[#D7E2EA]/60 font-light uppercase tracking-wide text-sm sm:text-base">
               {project.type}
             </span>
+            {project.description && (
+              <p className="mt-3 text-[#D7E2EA]/80 font-light leading-relaxed text-sm sm:text-base max-w-xl">
+                {project.description}
+              </p>
+            )}
           </div>
 
-          <LiveProjectButton className="w-full md:w-auto md:flex-shrink-0" />
+          {project.url ? (
+            <LiveProjectButton href={project.url} className="w-full md:w-auto md:flex-shrink-0" />
+          ) : (
+            <span className="inline-flex w-full items-center justify-center rounded-full border-2 border-[#D7E2EA]/40 px-8 py-3 sm:px-10 sm:py-3.5 text-[#D7E2EA]/60 font-medium uppercase tracking-widest text-sm sm:text-base md:w-auto md:flex-shrink-0">
+              {project.badge ?? 'In Development'}
+            </span>
+          )}
         </div>
 
         {/* Image grid */}

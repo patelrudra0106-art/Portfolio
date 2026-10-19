@@ -9,12 +9,14 @@ import { Footer } from './components/Footer';
 function App() {
   return (
     <div className="main-wrapper min-h-screen">
-      <HeroSection />
-      <MarqueeSection />
-      <AboutSection />
-      <SkillsSection />
-      <ProjectsSection />
-      <ContactSection />
+      <main>
+        <HeroSection />
+        <MarqueeSection />
+        <AboutSection />
+        <SkillsSection />
+        <ProjectsSection />
+        <ContactSection />
+      </main>
       <Footer />
     </div>
   );
