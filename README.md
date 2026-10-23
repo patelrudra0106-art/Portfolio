@@ -30,7 +30,7 @@ Unknown addresses show a custom 404 page.
 - **Hire section** with services, a four-step process, FAQ and contact buttons
 - **Testimonials** section that stays hidden until you add entries
 - **Contact section** with copy-to-clipboard buttons, social links and a message form
-- **Mobile navigation** menu and a text logo that returns to the top
+- **Mobile navigation** drawer that slides in from the left
 - **Accessibility**: visible keyboard focus rings, labelled buttons and links, and live status messages on the form
 - **SEO**: page titles and descriptions, Open Graph and Twitter tags, JSON-LD structured data, `sitemap.xml`, `robots.txt`, `llms.txt`, and a canonical URL on each page
 
