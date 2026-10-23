@@ -13,7 +13,7 @@ export const HeroSection = () => {
       <FadeIn delay={0.15} y={40} duration={1}>
         <div className="overflow-hidden w-full px-6 md:px-10 mt-6 sm:mt-4 md:-mt-5">
           <h1 className="hero-heading hero-title font-black uppercase tracking-tight leading-none whitespace-nowrap">
-            Hi, i&apos;m rudra
+            Patel Rudra
           </h1>
         </div>
       </FadeIn>
@@ -44,7 +44,7 @@ export const HeroSection = () => {
         <FadeIn delay={0.35} y={20} duration={0.8}>
           <p className="text-[#D7E2EA] font-light uppercase tracking-wide leading-snug
             text-[clamp(0.8rem,1.4vw,1.25rem)] max-w-[260px] sm:max-w-[220px] xl:max-w-[260px]">
-            a full-stack web developer from surat, gujarat building react and node.js apps
+            A full-stack web developer from Surat, Gujarat, building React and Node.js apps
           </p>
         </FadeIn>
 

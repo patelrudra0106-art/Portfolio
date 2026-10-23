@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex" />
+    <meta name="theme-color" content="#0C0C0C" />
+    <title>Page not found | Patel Rudra</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <style>
+      @font-face {
+        font-family: 'Kanit';
+        font-style: normal;
+        font-weight: 400;
+        font-display: swap;
+        src: url('/fonts/kanit-latin-400-normal.woff2') format('woff2');
+      }
+      @font-face {
+        font-family: 'Kanit';
+        font-style: normal;
+        font-weight: 500;
+        font-display: swap;
+        src: url('/fonts/kanit-latin-500-normal.woff2') format('woff2');
+      }
+      @font-face {
+        font-family: 'Kanit';
+        font-style: normal;
+        font-weight: 900;
+        font-display: swap;
+        src: url('/fonts/kanit-latin-900-normal.woff2') format('woff2');
+      }
+      :root { color-scheme: dark; }
+      * { box-sizing: border-box; }
+      html, body { margin: 0; min-height: 100%; }
+      body {
+        background: #0C0C0C;
+        color: #D7E2EA;
+        font-family: 'Kanit', sans-serif;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+        text-align: center;
+      }
+      main {
+        max-width: 560px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      img {
+        width: min(380px, 80vw);
+        height: auto;
+        margin-bottom: 8px;
+      }
+      h1 {
+        font-weight: 900;
+        font-size: clamp(5rem, 22vw, 9rem);
+        line-height: 1;
+        margin: 0;
+        letter-spacing: -0.02em;
+      }
+      p {
+        font-weight: 400;
+        font-size: clamp(1rem, 2.5vw, 1.25rem);
+        line-height: 1.5;
+        opacity: 0.8;
+        margin: 16px 0 32px;
+      }
+      a {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border: 2px solid #D7E2EA;
+        border-radius: 9999px;
+        padding: 12px 32px;
+        color: #D7E2EA;
+        text-decoration: none;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        font-weight: 500;
+        font-size: 0.9rem;
+        transition: background-color 0.2s ease;
+      }
+      a:hover { background: rgba(215, 226, 234, 0.1); }
+      a:focus-visible {
+        outline: 2px solid #D7E2EA;
+        outline-offset: 3px;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <img
+        src="/404-illustration.webp"
+        alt="A small spaceship drifting past a red planet"
+        width="1200"
+        height="800"
+      />
+      <h1>404</h1>
+      <p>This page drifted off into space. Let's get you back on course.</p>
+      <a href="/">Back to home</a>
+    </main>
+  </body>
+</html>

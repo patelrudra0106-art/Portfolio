@@ -1,0 +1,18 @@
+# Patel Rudra
+
+> Patel Rudra is a full-stack web developer based in Surat, Gujarat, India. Patel Rudra builds web applications, landing pages and desktop tools with React, TypeScript, Node.js, Supabase, MongoDB and Python.
+
+## Projects
+
+- [Brew & Bean](https://cafe-landing-page-ashy.vercel.app): A cafe landing page built with React, Vite, Tailwind CSS and Framer Motion. Source code: https://github.com/patelrudra0106-art/cafe-landing-page
+- [Travel Website Landing Page](https://travel-website-landing-page-iota.vercel.app/): A responsive travel agency landing page built with React, TypeScript, Vite and Tailwind CSS. Source code: https://github.com/patelrudra0106-art/travel-website-landing-page
+- [SPACE-SURVIVOR](https://github.com/patelrudra0106-art/SPACE-SURVIVOR): A roguelike space shooter built with Python and Pygame. Source code: https://github.com/patelrudra0106-art/SPACE-SURVIVOR
+- [Nova AI Assistant](https://github.com/patelrudra0106-art/Nova-AI-Assistant): A voice-controlled Windows assistant that opens apps, controls volume, sends WhatsApp messages, manages reminders and answers questions with a Groq-hosted LLM. Source code: https://github.com/patelrudra0106-art/Nova-AI-Assistant
+
+## Contact
+
+- Website: https://portfolio-rudra-58.vercel.app/
+- GitHub: https://github.com/patelrudra0106-art
+- Instagram: https://www.instagram.com/rudra011028/
+- Email: patelrudra0106@gmail.com
+- WhatsApp: https://wa.me/916352813895

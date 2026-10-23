@@ -43,7 +43,7 @@ export const ContactSection = () => {
       <div className="max-w-5xl mx-auto">
         <FadeIn delay={0} y={40} duration={0.8}>
           <h2 className="hero-heading font-black uppercase leading-none tracking-tight text-center text-[clamp(3rem,12vw,160px)] mb-6 sm:mb-8">
-            Contact
+            Get in Touch
           </h2>
         </FadeIn>
         <FadeIn delay={0.1} y={20} duration={0.7}>

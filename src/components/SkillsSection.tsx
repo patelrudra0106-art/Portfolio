@@ -21,7 +21,7 @@ export const SkillsSection = () => {
       <div className="max-w-5xl mx-auto">
         <FadeIn delay={0} y={40} duration={0.8}>
           <h2 className="hero-heading font-black uppercase leading-none tracking-tight text-center text-[clamp(3rem,12vw,160px)] mb-12 sm:mb-16 md:mb-20">
-            Skills
+            Full-Stack Skills
           </h2>
         </FadeIn>
 

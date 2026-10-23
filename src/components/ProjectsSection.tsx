@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { motion, useScroll, useTransform, MotionValue } from 'framer-motion';
-import { LiveProjectButton } from './LiveProjectButton';
+import { Link } from 'react-router-dom';
+import { ProjectLinkButton, linkButtonClass } from './ProjectLinkButton';
 import { projects, Project, ProjectImage } from '../data/projects';
 
 const STACK_TOP = 16;   // px from viewport top where the first card pins
@@ -79,19 +80,47 @@ const ProjectCard = ({ project, index, totalCards, progress, stack }: ProjectCar
                 {project.description}
               </p>
             )}
+            {project.stack && (
+              <ul aria-label="Tech stack" className="mt-4 flex flex-wrap gap-2">
+                {project.stack.map((tech) => (
+                  <li
+                    key={tech}
+                    className="rounded-full border border-[#D7E2EA]/30 px-3 py-1 text-xs sm:text-sm uppercase tracking-wide text-[#D7E2EA]/80"
+                  >
+                    {tech}
+                  </li>
+                ))}
+              </ul>
+            )}
           </div>
 
-          {project.url ? (
-            <LiveProjectButton
-              href={project.url}
-              label={project.title}
-              className="w-full md:w-auto md:flex-shrink-0"
-            />
-          ) : (
-            <span className="inline-flex w-full items-center justify-center rounded-full border-2 border-[#D7E2EA]/40 px-8 py-3 sm:px-10 sm:py-3.5 text-[#D7E2EA]/60 font-medium uppercase tracking-widest text-sm sm:text-base md:w-auto md:flex-shrink-0">
-              {project.badge ?? 'In Development'}
-            </span>
-          )}
+          <div className="flex w-full flex-col gap-3 md:w-auto md:flex-shrink-0">
+            <Link to={`/projects/${project.slug}`} className={linkButtonClass('w-full md:w-auto')}>
+              Case Study
+            </Link>
+            {project.url && (
+              <ProjectLinkButton
+                href={project.url}
+                label={project.title}
+                text="Live Project"
+                className="w-full md:w-auto"
+              />
+            )}
+            {project.repoUrl && (
+              <ProjectLinkButton
+                href={project.repoUrl}
+                label={project.title}
+                text="Source Code"
+                icon="github"
+                className="w-full md:w-auto"
+              />
+            )}
+            {!project.url && (
+              <span className="inline-flex w-full items-center justify-center rounded-full border-2 border-[#D7E2EA]/40 px-8 py-3 sm:px-10 sm:py-3.5 text-[#D7E2EA]/60 font-medium uppercase tracking-widest text-sm sm:text-base md:w-auto">
+                {project.badge ?? 'In Development'}
+              </span>
+            )}
+          </div>
         </div>
 
         {/* Image grid: only for projects that have screenshots */}
@@ -143,7 +172,7 @@ export const ProjectsSection = () => {
           viewport={{ once: true, margin: '100px' }}
           transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
         >
-          Project
+          Projects
         </motion.h2>
 
         <div ref={listRef} className="relative">

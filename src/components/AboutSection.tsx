@@ -9,7 +9,7 @@ const DECOR_IMAGES = {
   group: 'https://shrug-person-78902957.figma.site/_components/v2/ebb2b8f25d8e24d5f0a5ca8af4c950de81aa2fd7/Group_134-1.2e04f3ce.png',
 };
 
-const ABOUT_TEXT = "I'm Rudra, a student and full-stack web developer based in Surat, Gujarat. I build web applications with React, Node.js and Supabase, and I enjoy turning ideas into working products. Let's build something together!";
+const ABOUT_TEXT = "Patel Rudra is a full-stack web developer in Surat, Gujarat, who builds web applications with React, Node.js, Supabase and MongoDB. Still a student, Patel Rudra enjoys turning ideas into working products. My projects include a cafe landing page, a travel agency website, a space shooter game and a voice-controlled Windows assistant. Let's build something together!";
 
 // Small + faded on phones so they never fight the text; full size from md.
 const decorImg = 'w-full opacity-40 sm:opacity-100 pointer-events-none';
@@ -45,7 +45,7 @@ export const AboutSection = () => {
       <div className="flex flex-col items-center text-center z-10 max-w-3xl">
         <FadeIn delay={0} y={40} duration={1}>
           <h2 className="hero-heading font-black uppercase leading-none tracking-tight text-[clamp(3rem,12vw,160px)] w-full">
-            About me
+            About Me
           </h2>
         </FadeIn>
 
