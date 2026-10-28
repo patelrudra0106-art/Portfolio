@@ -1,193 +1,25 @@
-import { useEffect, useRef, useState } from 'react';
-import { motion, useScroll, useTransform, MotionValue } from 'framer-motion';
-import { Link } from 'react-router-dom';
-import { ProjectLinkButton, linkButtonClass } from './ProjectLinkButton';
-import { projects, Project, ProjectImage } from '../data/projects';
+import { motion } from 'framer-motion';
+import { projects } from '../data/projects';
+import { ProjectCardStack } from './ProjectCardStack';
 
-const STACK_TOP = 16;   // px from viewport top where the first card pins
-const STACK_STEP = 28;  // px each following card pins lower
-const SCALE_STEP = 0.03;
-// Pinning a card taller than the screen would hide its bottom, so only stack on tall viewports.
-const STACK_QUERY = '(min-height: 760px)';
+export const ProjectsSection = () => (
+  <section
+    id="projects"
+    className="relative bg-[#0C0C0C] rounded-t-[28px] sm:rounded-t-[50px] md:rounded-t-[60px] -mt-10 sm:-mt-12 md:-mt-14 z-10 px-4 sm:px-8 md:px-10 pb-20"
+  >
+    <div className="max-w-5xl mx-auto">
+      <motion.h2
+        className="hero-heading font-black uppercase leading-none tracking-tight text-center
+          text-[clamp(3rem,12vw,160px)] pt-10 mb-10 sm:mb-14 md:mb-16"
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: '100px' }}
+        transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
+      >
+        Projects
+      </motion.h2>
 
-const useCanStack = () => {
-  const [canStack, setCanStack] = useState(
-    () => typeof window !== 'undefined' && window.matchMedia(STACK_QUERY).matches
-  );
-  useEffect(() => {
-    const mq = window.matchMedia(STACK_QUERY);
-    const update = () => setCanStack(mq.matches);
-    update();
-    mq.addEventListener('change', update);
-    return () => mq.removeEventListener('change', update);
-  }, []);
-  return canStack;
-};
-
-const ProjectImg = ({ image, className }: { image: ProjectImage; className: string }) => (
-  <img
-    src={image.src}
-    alt={image.alt}
-    width={image.width}
-    height={image.height}
-    loading="lazy"
-    decoding="async"
-    className={`${className} rounded-[18px] sm:rounded-[36px] md:rounded-[60px] object-cover`}
-  />
+      <ProjectCardStack projects={projects} />
+    </div>
+  </section>
 );
-
-interface ProjectCardProps {
-  project: Project;
-  index: number;
-  totalCards: number;
-  progress: MotionValue<number>;
-  stack: boolean;
-}
-
-const ProjectCard = ({ project, index, totalCards, progress, stack }: ProjectCardProps) => {
-  const targetScale = 1 - (totalCards - 1 - index) * SCALE_STEP;
-  const scale = useTransform(progress, [index / totalCards, 1], [1, targetScale]);
-  const isLast = index === totalCards - 1;
-
-  return (
-    <motion.div
-      style={stack ? { scale, top: STACK_TOP + index * STACK_STEP, transformOrigin: 'center top' } : undefined}
-      className={`mx-auto w-full max-w-5xl ${stack ? 'sticky z-20' : ''} ${
-        isLast ? '' : stack ? 'mb-[14svh]' : 'mb-8'
-      }`}
-    >
-      <div className="relative rounded-[28px] sm:rounded-[50px] md:rounded-[60px] border-2 border-[#D7E2EA] bg-[#0C0C0C] p-4 sm:p-6 md:p-8">
-        {/* Top row */}
-        <div className="mb-5 flex flex-col gap-4 md:mb-8 md:flex-row md:items-start md:justify-between md:gap-6">
-          <div className="flex min-w-0 items-baseline gap-3 md:flex-1 md:flex-col md:items-center md:gap-0">
-            <span className="text-[#D7E2EA] font-black text-[clamp(2.5rem,10vw,8.75rem)] leading-none tracking-tight">
-              {project.number}
-            </span>
-            <span className="text-[#D7E2EA] font-medium uppercase tracking-wider text-xs sm:text-sm md:text-base md:mt-1">
-              {project.category}
-            </span>
-          </div>
-
-          <div className="min-w-0 md:flex-1">
-            <h3 className="text-[#D7E2EA] font-black uppercase tracking-tight leading-tight break-words text-[clamp(1.5rem,4vw,3.5rem)] mb-1 md:mb-2">
-              {project.title}
-            </h3>
-            <span className="text-[#D7E2EA]/60 font-light uppercase tracking-wide text-sm sm:text-base">
-              {project.type}
-            </span>
-            {project.description && (
-              <p className="mt-3 text-[#D7E2EA]/80 font-light leading-relaxed text-sm sm:text-base max-w-xl">
-                {project.description}
-              </p>
-            )}
-            {project.stack && (
-              <ul aria-label="Tech stack" className="mt-4 flex flex-wrap gap-2">
-                {project.stack.map((tech) => (
-                  <li
-                    key={tech}
-                    className="rounded-full border border-[#D7E2EA]/30 px-3 py-1 text-xs sm:text-sm uppercase tracking-wide text-[#D7E2EA]/80"
-                  >
-                    {tech}
-                  </li>
-                ))}
-              </ul>
-            )}
-          </div>
-
-          <div className="flex w-full flex-col gap-3 md:w-auto md:flex-shrink-0">
-            <Link to={`/projects/${project.slug}`} className={linkButtonClass('w-full md:w-auto')}>
-              Case Study
-            </Link>
-            {project.url && (
-              <ProjectLinkButton
-                href={project.url}
-                label={project.title}
-                text="Live Project"
-                className="w-full md:w-auto"
-              />
-            )}
-            {project.repoUrl && (
-              <ProjectLinkButton
-                href={project.repoUrl}
-                label={project.title}
-                text="Source Code"
-                icon="github"
-                className="w-full md:w-auto"
-              />
-            )}
-            {!project.url && (
-              <span className="inline-flex w-full items-center justify-center rounded-full border-2 border-[#D7E2EA]/40 px-8 py-3 sm:px-10 sm:py-3.5 text-[#D7E2EA]/60 font-medium uppercase tracking-widest text-sm sm:text-base md:w-auto">
-                {project.badge ?? 'In Development'}
-              </span>
-            )}
-          </div>
-        </div>
-
-        {/* Image grid: only for projects that have screenshots */}
-        {project.images && (
-          <div className="grid grid-cols-5 gap-2 sm:gap-4">
-            <div className="col-span-2 flex flex-col gap-2 sm:gap-4">
-              <ProjectImg
-                image={project.images.col1Img1}
-                className="w-full h-[clamp(90px,16vw,230px)]"
-              />
-              <ProjectImg
-                image={project.images.col1Img2}
-                className="w-full h-[clamp(110px,22vw,340px)]"
-              />
-            </div>
-
-            <div className="col-span-3">
-              <ProjectImg
-                image={project.images.col2Img}
-                className="w-full h-full min-h-[200px]"
-              />
-            </div>
-          </div>
-        )}
-      </div>
-    </motion.div>
-  );
-};
-
-export const ProjectsSection = () => {
-  const listRef = useRef<HTMLDivElement>(null);
-  const stack = useCanStack();
-  const { scrollYProgress } = useScroll({
-    target: listRef,
-    offset: ['start start', 'end end'],
-  });
-
-  return (
-    <section
-      id="projects"
-      className="relative bg-[#0C0C0C] rounded-t-[28px] sm:rounded-t-[50px] md:rounded-t-[60px] -mt-10 sm:-mt-12 md:-mt-14 z-10 px-4 sm:px-8 md:px-10 pb-20"
-    >
-      <div className="max-w-5xl mx-auto">
-        <motion.h2
-          className="hero-heading font-black uppercase leading-none tracking-tight text-center
-            text-[clamp(3rem,12vw,160px)] pt-10 mb-10 sm:mb-20 md:mb-28"
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '100px' }}
-          transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
-        >
-          Projects
-        </motion.h2>
-
-        <div ref={listRef} className="relative">
-          {projects.map((project, index) => (
-            <ProjectCard
-              key={project.id}
-              project={project}
-              index={index}
-              totalCards={projects.length}
-              progress={scrollYProgress}
-              stack={stack}
-            />
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-};

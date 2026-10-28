@@ -1,5 +1,6 @@
 import { useRef } from 'react';
 import { motion, useScroll, useTransform, useReducedMotion, MotionValue } from 'framer-motion';
+import { SkeletonImage } from './SkeletonImage';
 
 const MARQUEE_IMAGES = [
   'https://motionsites.ai/assets/hero-space-voyage-preview-eECLH3Yc.gif',
@@ -44,14 +45,14 @@ const MarqueeRow = ({ images, progress, reverse = false }: MarqueeRowProps) => {
     <div className="w-max -translate-x-1/3" aria-hidden="true">
       <motion.div className="flex w-max gap-3" style={{ x: reduceMotion ? 0 : drift }}>
         {tripled.map((src, i) => (
-          <img
+          <SkeletonImage
             key={i}
             src={src}
             alt=""
-            loading="lazy"
+            decorative
             width={420}
             height={270}
-            className="aspect-[420/270] w-[220px] flex-shrink-0 rounded-xl object-cover sm:w-[320px] sm:rounded-2xl lg:w-[420px]"
+            className="w-[220px] flex-shrink-0 rounded-xl sm:w-[320px] sm:rounded-2xl lg:w-[420px]"
           />
         ))}
       </motion.div>

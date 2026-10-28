@@ -2,6 +2,7 @@ import { FadeIn } from './FadeIn';
 import { Magnet } from './Magnet';
 import { ContactButton } from './ContactButton';
 import { Navbar } from './Navbar';
+import { SkeletonImage } from './SkeletonImage';
 
 const PORTRAIT_URL = 'https://shrug-person-78902957.figma.site/_components/v2/d24c01ad3a56fc65e942a1f501eb73db42d7cf9a/Rectangle_40443.81459862.png';
 
@@ -28,10 +29,12 @@ export const HeroSection = () => {
           lg:absolute lg:inset-x-0 lg:bottom-0 lg:mt-0 lg:w-[420px] xl:w-[520px]"
       >
         <Magnet padding={150} strength={3} activeTransition="transform 0.3s ease-out" inactiveTransition="transform 0.6s ease-in-out">
-          <img
+          <SkeletonImage
             src={PORTRAIT_URL}
             alt="Rudra, full-stack web developer from Surat, Gujarat"
-            className="w-full h-auto rounded-[28px] sm:rounded-[50px] md:rounded-[60px]"
+            fill={false}
+            fallbackRatio="4 / 5"
+            className="w-full rounded-[28px] sm:rounded-[50px] md:rounded-[60px]"
             loading="eager"
             fetchPriority="high"
           />

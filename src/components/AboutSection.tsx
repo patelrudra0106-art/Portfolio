@@ -1,6 +1,7 @@
 import { FadeIn } from './FadeIn';
 import { AnimatedText } from './AnimatedText';
 import { ContactButton } from './ContactButton';
+import { SkeletonImage } from './SkeletonImage';
 
 const DECOR_IMAGES = {
   moon: 'https://shrug-person-78902957.figma.site/_components/v2/ebb2b8f25d8e24d5f0a5ca8af4c950de81aa2fd7/moon_icon.11395d36.png',
@@ -23,22 +24,22 @@ export const AboutSection = () => {
       {/* Decorative images */}
       <FadeIn delay={0.1} x={-80} y={0} duration={0.9}
         className="absolute top-[3%] left-[2%] md:left-[4%] w-[64px] sm:w-[120px] md:w-[170px] lg:w-[210px]">
-        <img src={DECOR_IMAGES.moon} alt="" aria-hidden="true" className={decorImg} />
+        <SkeletonImage src={DECOR_IMAGES.moon} alt="" decorative fill={false} className={decorImg} />
       </FadeIn>
 
       <FadeIn delay={0.25} x={-80} y={0} duration={0.9}
         className="absolute bottom-[4%] left-[4%] sm:left-[6%] md:left-[10%] w-[56px] sm:w-[110px] md:w-[150px] lg:w-[180px]">
-        <img src={DECOR_IMAGES.p59} alt="" aria-hidden="true" className={decorImg} />
+        <SkeletonImage src={DECOR_IMAGES.p59} alt="" decorative fill={false} className={decorImg} />
       </FadeIn>
 
       <FadeIn delay={0.15} x={80} y={0} duration={0.9}
         className="absolute top-[3%] right-[2%] md:right-[4%] w-[64px] sm:w-[120px] md:w-[170px] lg:w-[210px]">
-        <img src={DECOR_IMAGES.lego} alt="" aria-hidden="true" className={decorImg} />
+        <SkeletonImage src={DECOR_IMAGES.lego} alt="" decorative fill={false} className={decorImg} />
       </FadeIn>
 
       <FadeIn delay={0.3} x={80} y={0} duration={0.9}
         className="absolute bottom-[4%] right-[4%] sm:right-[6%] md:right-[10%] w-[68px] sm:w-[120px] md:w-[170px] lg:w-[220px]">
-        <img src={DECOR_IMAGES.group} alt="" aria-hidden="true" className={decorImg} />
+        <SkeletonImage src={DECOR_IMAGES.group} alt="" decorative fill={false} className={decorImg} />
       </FadeIn>
 
       {/* Content */}
